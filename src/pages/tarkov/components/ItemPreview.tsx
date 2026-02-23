@@ -59,7 +59,7 @@ export const ItemPreview = (props: ItemPreviewProps) => {
       {props.showItemInfo && <ItemInfo item={props.item} />}
 
       <style jsx>{`
-        @import 'assets/css/mixins.scss';
+        @use 'assets/css/mixins.scss' as *;
 
         .item-preview {
           position: relative;

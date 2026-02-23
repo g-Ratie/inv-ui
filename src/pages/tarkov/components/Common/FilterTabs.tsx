@@ -33,6 +33,8 @@ export const FilterTabs = (props: FilterTabsProps) => {
       ))}
 
       <style jsx global>{`
+        @use 'sass:math';
+
         $filter-button-size: 30px;
         $filter-button-color: rgba(150, 150, 150, 1);
         $filter-cutout-size: 6px;
@@ -80,7 +82,7 @@ export const FilterTabs = (props: FilterTabsProps) => {
               left: -#{$filter-cutout-size};
               border-color: transparent;
               border-style: solid;
-              border-width: #{$filter-cutout-size / 2};
+              border-width: #{math.div($filter-cutout-size, 2)};
               border-right-color: #{$filter-button-color};
               border-bottom-color: #{$filter-button-color};
             }

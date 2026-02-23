@@ -35,4 +35,22 @@ export default defineConfig({
       '@zus': path.resolve(__dirname, './src/zustand'),
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (!id.includes('node_modules') || id.endsWith('.css')) return
+          if (id.includes('/framer-motion/') || id.includes('/react-spring/') || id.includes('/animejs/')) {
+            return 'motion-vendor'
+          }
+          if (id.includes('/lodash/') || id.includes('/moment/')) {
+            return 'data-vendor'
+          }
+          if (id.includes('/howler/')) {
+            return 'audio-vendor'
+          }
+        },
+      },
+    },
+  },
 })

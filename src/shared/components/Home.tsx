@@ -93,7 +93,7 @@ export const Home = () => {
       </div>
 
       <style jsx>{`
-        @import 'assets/css/mixins.scss';
+        @use 'assets/css/mixins.scss' as *;
 
         #home {
           position: relative;
