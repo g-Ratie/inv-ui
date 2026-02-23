@@ -1,5 +1,3 @@
-import { useTransition, animated } from 'react-spring'
-
 import { Grid } from '../Grid'
 import { FilterTabs } from '../Common'
 
@@ -7,13 +5,8 @@ import { FilterTabs } from '../Common'
 // Component definition //
 //////////////////////////
 export const Stash = () => {
-  const transitions = useTransition(true, {
-    from: { opacity: 0, right: -30 },
-    enter: { opacity: 1, right: 0 },
-  })
-
-  return transitions((transitionStyle: any) => (
-    <animated.div id="stash" className="panel" style={transitionStyle}>
+  return (
+    <div id="stash" className="panel panel-slide-in-right">
       <div className="panel-title">STASH</div>
 
       <div className="section">
@@ -31,6 +24,6 @@ export const Stash = () => {
           }
         }
       `}</style>
-    </animated.div>
-  ))
+    </div>
+  )
 }

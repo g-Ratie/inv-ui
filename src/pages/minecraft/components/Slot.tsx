@@ -58,9 +58,11 @@ export const Slot = (props: SlotProps) => {
 
   useEffect(() => {
     if (doubleClickable) {
-      setTimeout(() => {
+      const timeout = window.setTimeout(() => {
         setDoubleClickable(false)
       }, 200)
+
+      return () => window.clearTimeout(timeout)
     }
   }, [doubleClickable])
 

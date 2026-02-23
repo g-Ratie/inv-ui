@@ -42,7 +42,15 @@ export const HoldButton = (props: HoldButtonProps) => {
   //
 
   useEffect(() => {
-    yRange.onChange(value => setIsComplete(value >= 1))
+    const unsubscribe = yRange.onChange(value => setIsComplete(value >= 1))
+
+    return () => {
+      unsubscribe()
+      if (loop.current) {
+        clearInterval(loop.current)
+        loop.current = null
+      }
+    }
   }, [yRange])
 
   //

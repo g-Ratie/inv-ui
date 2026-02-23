@@ -9,6 +9,9 @@ import { AssetManager } from '@services/assets'
 
 import './index.scss'
 
+let tarkovAssetsPreloaded = false
+let tarkovInventoryLoaded = false
+
 export const Tarkov = () => {
   const [isReady, setIsReady] = useState(false)
 
@@ -17,20 +20,34 @@ export const Tarkov = () => {
   //
 
   useEffect(() => {
+    let cancelled = false
+
     const init = async () => {
-      await AssetManager.preload([
-        '/assets/tarkov/images/guns.png',
-        '/assets/tarkov/images/consumables.png',
-        '/assets/tarkov/images/wallpaper.jpg',
-        '/assets/tarkov/images/grid_square.png',
-      ])
+      if (!tarkovAssetsPreloaded) {
+        await AssetManager.preload([
+          '/assets/tarkov/images/guns.png',
+          '/assets/tarkov/images/consumables.png',
+          '/assets/tarkov/images/wallpaper.jpg',
+          '/assets/tarkov/images/grid_square.png',
+        ])
+        tarkovAssetsPreloaded = true
+      }
 
-      await dispatch(loadSavedInventoryAction())
+      if (cancelled) return
 
-      setIsReady(true)
+      if (!tarkovInventoryLoaded) {
+        await dispatch(loadSavedInventoryAction())
+        tarkovInventoryLoaded = true
+      }
+
+      if (!cancelled) setIsReady(true)
     }
 
     init()
+
+    return () => {
+      cancelled = true
+    }
   }, [])
 
   //

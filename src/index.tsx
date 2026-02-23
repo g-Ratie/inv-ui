@@ -1,3 +1,4 @@
+import React from 'react'
 import { createRoot } from 'react-dom/client'
 import { HelmetProvider } from 'react-helmet-async'
 
@@ -18,11 +19,11 @@ if (!root) {
 }
 
 createRoot(root).render(
-  //<React.StrictMode>を外しているので、どこかで付け直す
-  //色が薄くなる
-  <HelmetProvider>
-    <SoundProvider ref={el => SoundManager.setTopLevelInstance(el)}>
-      <App />
-    </SoundProvider>
-  </HelmetProvider>
+  <React.StrictMode>
+    <HelmetProvider>
+      <SoundProvider ref={el => SoundManager.setTopLevelInstance(el)}>
+        <App />
+      </SoundProvider>
+    </HelmetProvider>
+  </React.StrictMode>
 )

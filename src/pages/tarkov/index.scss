@@ -20,4 +20,59 @@
       margin-bottom: 4px;
     }
   }
+
+  .panel-slide-in-left {
+    animation: tarkovPanelSlideInLeft 180ms ease-out both;
+  }
+
+  .panel-slide-in-right {
+    animation: tarkovPanelSlideInRight 180ms ease-out both;
+  }
+
+  .panel-slide-in-up {
+    animation: tarkovPanelSlideInUp 180ms ease-out both;
+  }
+}
+
+@keyframes tarkovPanelSlideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes tarkovPanelSlideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes tarkovPanelSlideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #tarkov {
+    .panel-slide-in-left,
+    .panel-slide-in-right,
+    .panel-slide-in-up {
+      animation: none;
+    }
+  }
 }

@@ -5,12 +5,17 @@ import { Viewport } from './components/Viewport'
 
 import { SoundManager } from '@services/sounds'
 
+let falloutSoundsPreloaded = false
+
 export const Fallout = () => {
   useEffect(() => {
+    if (falloutSoundsPreloaded) return
+
     // Sounds are preloaded otherwise there is a noticable delay between
     // the first time a sound is triggered & when the audio actually plays
     // (due to audio file still being downloaded)
     SoundManager.preload(['FALLOUT', 'MISC'])
+    falloutSoundsPreloaded = true
   }, [])
 
   return (

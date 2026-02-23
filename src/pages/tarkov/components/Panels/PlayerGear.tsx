@@ -1,5 +1,3 @@
-import { useTransition, animated } from 'react-spring'
-
 import { EquipSlot } from '../Equip'
 import { EquipSlotType } from '../../data/definitions'
 
@@ -7,13 +5,8 @@ import { EquipSlotType } from '../../data/definitions'
 // Component definition //
 //////////////////////////
 export const PlayerGear = () => {
-  const transitions = useTransition(true, {
-    from: { opacity: 0, left: -30 },
-    enter: { opacity: 1, left: 0 },
-  })
-
-  return transitions((transitionStyle: any) => (
-    <animated.div id="gear" className="panel" style={transitionStyle}>
+  return (
+    <div id="gear" className="panel panel-slide-in-left">
       <div className="panel-title">GEAR</div>
 
       <div className="slots">
@@ -83,6 +76,6 @@ export const PlayerGear = () => {
           }
         }
       `}</style>
-    </animated.div>
-  ))
+    </div>
+  )
 }

@@ -9,6 +9,7 @@ import { sleep } from '@utils/sleep'
 
 const KITTY_PATS_REQUIRED = 3
 const LOGO_SIZE = '64px'
+let homeAssetsPreloaded = false
 
 export const Home = () => {
   const [pats, setPats] = useState(0)
@@ -19,11 +20,14 @@ export const Home = () => {
   //
 
   useEffect(() => {
+    if (homeAssetsPreloaded) return
+
     // Sounds are preloaded otherwise there is a noticable delay between
     // the first time a sound is triggered & when the audio actually plays
     // (due to audio file still being downloaded)
     SoundManager.preload(['MISC'])
     AssetManager.preload(['/assets/misc/images/bag.png', '/assets/misc/images/bagkitty.png'])
+    homeAssetsPreloaded = true
   }, [])
 
   //

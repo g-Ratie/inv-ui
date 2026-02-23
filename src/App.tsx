@@ -11,6 +11,8 @@ import { setActiveGameAction, loadSettingsAction } from '@zus/actions'
 
 import { GAMES } from '@constants/config'
 
+let appInitPromise: Promise<void> | null = null
+
 const App = () => {
   const activeGame = useStore(state => state.app.activeGame)
   const [isReady, setIsReady] = useState(false)
@@ -20,16 +22,27 @@ const App = () => {
   //
 
   useEffect(() => {
-    // Add any initializations that should be run before rendering the main view here
+    let cancelled = false
+
+    // StrictMode in development mounts twice; share bootstrap work and ignore stale completions.
     const init = async () => {
-      await dispatch(loadGameFromUrl())
+      if (!appInitPromise) {
+        appInitPromise = (async () => {
+          await dispatch(loadGameFromUrl())
+          await dispatch(loadSettingsAction())
+        })()
+      }
 
-      await dispatch(loadSettingsAction())
+      await appInitPromise
 
-      setIsReady(true)
+      if (!cancelled) setIsReady(true)
     }
 
     init()
+
+    return () => {
+      cancelled = true
+    }
   }, [])
 
   //
