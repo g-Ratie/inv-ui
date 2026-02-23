@@ -43,7 +43,7 @@ export class SoundManager {
     }
   }
 
-  static play = async (soundName: string, options: HowlOptions = {}) => {
+  static play = async (soundName: string, options: Partial<HowlOptions> = {}) => {
     try {
       if (!!instance) {
         await instance._play(soundName, options)
@@ -91,7 +91,7 @@ export class SoundProvider extends React.Component {
     }
   }
 
-  _play = async (soundName: string, options: HowlOptions = {}) => {
+  _play = async (soundName: string, options: Partial<HowlOptions> = {}) => {
     try {
       const { soundsEnabled, soundsVolume } = getState().settings.general
 

@@ -49,7 +49,7 @@ export class Keycode extends React.Component<KeycodeProps> {
 
     return (
       <Anime
-        ref={el => (this.animeRef = el)}
+        ref={(el: any) => (this.animeRef = el)}
         easing="easeInOutQuad"
         direction="alternate"
         translateY={[0, 2]}

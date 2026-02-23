@@ -10,7 +10,7 @@ module.exports = override(
     {
       plugins: [
         [
-          'styled-jsx-plugin-sass',
+          '@styled-jsx/plugin-sass',
           {
             sassOptions: { includePaths: ['src'] },
           },
